@@ -7,7 +7,7 @@ ENV SLEEP_DURATION 5s
 ENV MODULE_NAME "ELASTICACHE" 
 
 COPY build.sh .
-ADD BP-BASE-SHELL-STEPS /opt/buildpiper/shell-functions/$MODULE_NAME
+ADD BP-BASE-SHELL-STEPS /opt/buildpiper/shell-functions/
 ADD ELASTICACHE/elasticache.tf /opt/buildpiper/
 ADD ELASTICACHE/variable.tf /opt/buildpiper/
 

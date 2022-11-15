@@ -7,14 +7,13 @@ logInfoMessage "I'll create/update [$MODULE_NAME] whose properties are available
 sleep  "$SLEEP_DURATION"
 
 cd  "$WORKSPACE"/"${CODEBASE_DIR}"
-cp /opt/buildpiper/elasticache.tf .
-cp /opt/buildpiper/variable.tf .
+cp /opt/buildpiper/*.tf .
 
 logInfoMessage "Running below tf command"
 logInfoMessage "terraform $INSTRUCTION"
 
 terraform init
-if [ "$MODULE_NAME" = "ELASTICACHE" ]; then
+if [ "$MODULE_NAME" == "$MODULE_NAME" ]; then
 case "$INSTRUCTION" in
 
   plan)
@@ -33,4 +32,6 @@ case "$INSTRUCTION" in
     logInfoMessage "Not a valid option"
     ;;
 esac
+else
+	echo "Please Check Module Name"
 fi

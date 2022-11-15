@@ -7,15 +7,15 @@ logInfoMessage "I'll create/update [$MODULE_NAME] whose properties are available
 sleep  "$SLEEP_DURATION"
 
 cd  "$WORKSPACE"/"${CODEBASE_DIR}"
-cp /opt/buildpiper/eks.tf .
-cp /opt/buildpiper/local.tf .
-cp /opt/buildpiper/variable.tf .
+cp /opt/buildpiper/*.tf .
+#cp /opt/buildpiper/local.tf .
+#cp /opt/buildpiper/variable.tf .
 
 logInfoMessage "Running below tf command"
 logInfoMessage "terraform $INSTRUCTION"
 
 terraform init
-if [ "$MODULE_NAME" = "EKS" ]; then
+if [ "$MODULE_NAME" == "$MODULE_NAME" ]; then
 case "$INSTRUCTION" in
 
   plan)

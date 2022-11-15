@@ -8,8 +8,6 @@ sleep  "$SLEEP_DURATION"
 
 cd  "$WORKSPACE"/"${CODEBASE_DIR}"
 cp /opt/buildpiper/*.tf .
-#cp /opt/buildpiper/local.tf .
-#cp /opt/buildpiper/variable.tf .
 
 logInfoMessage "Running below tf command"
 logInfoMessage "terraform $INSTRUCTION"

@@ -6,14 +6,14 @@ logInfoMessage "I'll create/update [$MODULE_NAME] whose properties are available
 sleep  "$SLEEP_DURATION"
 
 cd  "$WORKSPACE"/"${CODEBASE_DIR}"
-cp /opt/buildpiper/"$MODULE_NAME"/elasticache.tf .
-cp /opt/buildpiper/"$MODULE_NAME"/variable.tf .
+cp /opt/buildpiper/elasticache.tf .
+cp /opt/buildpiper/variable.tf .
 
 logInfoMessage "Running below tf command"
 logInfoMessage "terraform $INSTRUCTION"
 
 terraform init
-if [ "$MODULE_NAME" -eq ELASTICACHE ]; then
+if [ "$MODULE_NAME" = "ELASTICACHE" ]; then
 case "$INSTRUCTION" in
 
   plan)

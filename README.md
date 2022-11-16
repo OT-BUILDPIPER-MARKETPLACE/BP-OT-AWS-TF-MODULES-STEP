@@ -24,4 +24,7 @@ docker run -it --rm -v $PWD:/src  -e INSTRUCTION=plan -e WORKSPACE=/src -e CODEB
 # debug
 docker run -it --rm -v $PWD:/src -e WORKSPACE=/src -e CODEBASE_DIR=/ --entrypoint sh ot/tf-modules-step:0.0.1
 
+# terraform with plan(EKS))
+docker run -it --rm -v $PWD:/src  -e INSTRUCTION=plan -e MODULE=EKS -e WORKSPACE=/src -e CODEBASE_DIR=/ ot/tf-modules-step:0.0.1
+
 ```

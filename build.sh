@@ -2,8 +2,8 @@
 source /opt/buildpiper/shell-functions/functions.sh
 source /opt/buildpiper/shell-functions/log-functions.sh
 
-logInfoMessage "Creating for $MODULE_NAME"
-logInfoMessage "I'll create/update [$MODULE_NAME] whose properties are available at [$WORKSPACE] and have mounted at [$CODEBASE_DIR]"
+logInfoMessage "Creating for $MODULE"
+logInfoMessage "I'll create/update [$MODULE] whose properties are available at [$WORKSPACE] and have mounted at [$CODEBASE_DIR]"
 sleep  "$SLEEP_DURATION"
 
 cd  "$WORKSPACE"/"${CODEBASE_DIR}"

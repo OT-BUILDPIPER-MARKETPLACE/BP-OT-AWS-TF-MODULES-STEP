@@ -9,7 +9,6 @@ sleep  "$SLEEP_DURATION"
 
 cd  "${tfCodeLocation}"
 cp /opt/buildpiper/modules/${MODULE}/*.tf .
-cp /opt/buildpiper/modules/${MODULE}/*.tpl .
 
 logInfoMessage "Running below tf command"
 logInfoMessage "terraform $INSTRUCTION"

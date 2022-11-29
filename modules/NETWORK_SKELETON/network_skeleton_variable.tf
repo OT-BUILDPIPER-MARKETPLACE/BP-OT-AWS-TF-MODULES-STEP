@@ -37,6 +37,7 @@ variable "public_web_sg_name" {
 
 variable "logs_bucket" {
   description = "Name of bucket where we would be storing our logs"
+  type        = string
 }
 
 variable "logs_bucket_arn" {
@@ -86,11 +87,17 @@ variable "enable_alb_logging" {
 variable "alb_certificate_arn" {
   description = "Cretificate arn for alb"
   type        = string
+  default     = " "
 }
 
 variable "enable_deletion_protection" {
   type    = bool
   default = false
+}
+
+variable "enable_logging" {
+  type    = bool
+  default = true
 }
 
 variable "enable_igw_publicRouteTable_PublicSubnets_resource" {

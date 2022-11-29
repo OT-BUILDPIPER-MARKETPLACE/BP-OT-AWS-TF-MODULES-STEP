@@ -1,6 +1,6 @@
 module "vpc" {
   source                                               = "OT-CLOUD-KIT/vpc/aws"
-  version                                              = "1.0.0"
+  version                                              = "1.0.1"
   alb_certificate_arn                                  = var.alb_certificate_arn
   alb_name                                             = var.alb_name
   avaialability_zones                                  = var.avaialability_zones

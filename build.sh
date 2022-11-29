@@ -7,7 +7,7 @@ logInfoMessage "I'll create/update [$MODULE] whose properties are available at [
 sleep  "$SLEEP_DURATION"
 
 cd  "$WORKSPACE"/"${CODEBASE_DIR}"
-cp /opt/buildpiper/modules/${MODULE}/*.tf .
+cp /opt/buildpiper/modules/*.tf .
 
 logInfoMessage "Running below tf command"
 logInfoMessage "terraform $INSTRUCTION"

@@ -8,7 +8,7 @@ logInfoMessage "I'll create/update [$MODULE] available at [$tfCodeLocation]"
 sleep  "$SLEEP_DURATION"
 
 cd  "${tfCodeLocation}"
-cp /opt/buildpiper/modules/*.tf .
+cp /opt/buildpiper/modules/* .
 
 logInfoMessage "Running below tf command"
 logInfoMessage "terraform $INSTRUCTION"

@@ -8,7 +8,7 @@ I'll let people to use all the available OpsTree tf module via this step
 ```
 git submodule init
 git submodule update
-docker build -t ot/tf-modules-step:0.0.1 .
+docker build -t ot/tf-modules-step:0.1 .
 ```
 
 

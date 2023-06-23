@@ -3,11 +3,12 @@ source /opt/buildpiper/shell-functions/functions.sh
 source /opt/buildpiper/shell-functions/log-functions.sh
 
 logInfoMessage "Creating for $MODULE"
-logInfoMessage "I'll create/update [$MODULE] whose properties are available at [$WORKSPACE] and have mounted at [$CODEBASE_DIR]"
+tfCodeLocation="${WORKSPACE}"/"${CODEBASE_DIR}"/"${TF_CODE_LOCATION}"
+logInfoMessage "I'll create/update [$MODULE] available at [$tfCodeLocation]"
 sleep  "$SLEEP_DURATION"
 
-cd  "$WORKSPACE"/"${CODEBASE_DIR}"
-cp /opt/buildpiper/modules/${MODULE}/*.tf .
+cd  "${tfCodeLocation}"
+cp /opt/buildpiper/modules/* .
 
 logInfoMessage "Running below tf command"
 logInfoMessage "terraform $INSTRUCTION"

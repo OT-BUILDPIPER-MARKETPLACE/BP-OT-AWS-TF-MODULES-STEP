@@ -10,7 +10,7 @@ sleep  "$SLEEP_DURATION"
 getAssumeRole ${AWS_ASSUME_ROLE_ARN}
 
 cd  "${tfCodeLocation}"
-cp /opt/buildpiper/modules/*.tf .
+cp /opt/buildpiper/modules/* .
 
 logInfoMessage "Running below tf command"
 logInfoMessage "terraform $INSTRUCTION"

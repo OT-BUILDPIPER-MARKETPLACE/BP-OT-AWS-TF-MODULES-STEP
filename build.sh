@@ -7,6 +7,8 @@ tfCodeLocation="${WORKSPACE}"/"${CODEBASE_DIR}"/"${TF_CODE_LOCATION}"
 logInfoMessage "I'll create/update [$MODULE] available at [$tfCodeLocation]"
 sleep  "$SLEEP_DURATION"
 
+getAssumeRole ${AWS_ASSUME_ROLE_ARN}
+
 cd  "${tfCodeLocation}"
 cp /opt/buildpiper/modules/*.tf .
 

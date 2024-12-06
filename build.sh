@@ -7,9 +7,9 @@ source /opt/buildpiper/shell-functions/log-functions.sh
 tfCodeLocation="${WORKSPACE}"/"${CODEBASE_DIR}"/"${TF_CODE_LOCATION}"
 logInfoMessage "I'll create/update terraform code  available at [$tfCodeLocation]"
 
-TAG=${tail -n -1 $WORKSPACE/data.properties}
+TAG=$(tail -n -1 $WORKSPACE/data.properties)
 cd  "${tfCodeLocation}"
-
+echo $TAG
 #cp -r /opt/buildpiper/modules/${MODULE} ${tfCodeLocation}/
 #cp /opt/buildpiper/modules/${MODULE}/*.tf .
 

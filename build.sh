@@ -38,22 +38,19 @@ fi
 
 
 terraform init
-if [ "$EXTRA_VARS" == true ]
-then
-
 case "$INSTRUCTION" in
 
   plan)
     terraform init
-    terraform plan -var-file="terraform.tfvars"
+    terraform plan "${EXTRA_VARS}"
     ;;
 
   apply)
-    terraform apply -auto-approve -var-file="terraform.tfvars"
+    terraform apply -auto-approve "${EXTRA_VARS}"
     ;;
 
   destroy)
-    terraform destroy -auto-approve -var-file="terraform.tfvars"
+    terraform destroy -auto-approve "${EXTRA_VARS}"
     ;;
 
   *)

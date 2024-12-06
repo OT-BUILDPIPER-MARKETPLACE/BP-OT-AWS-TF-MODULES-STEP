@@ -4,6 +4,7 @@ RUN apk add --no-cache --upgrade bash
 RUN apk add jq
 
 ENV SLEEP_DURATION 5s
+ENV EXTRA_VARS ""
 
 COPY build.sh .
 ADD BP-BASE-SHELL-STEPS /opt/buildpiper/shell-functions/

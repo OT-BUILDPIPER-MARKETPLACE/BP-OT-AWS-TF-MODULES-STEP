@@ -8,6 +8,8 @@ tfCodeLocation="${WORKSPACE}"/"${CODEBASE_DIR}"/"${TF_CODE_LOCATION}"
 logInfoMessage "I'll create/update terraform code  available at [$tfCodeLocation]"
 
 TAG=$(tail -n -1 $WORKSPACE/data.properties)
+
+
 cd  "${tfCodeLocation}"
 echo $TAG
 #cp -r /opt/buildpiper/modules/${MODULE} ${tfCodeLocation}/
@@ -38,19 +40,20 @@ fi
 
 
 terraform init
+S3_ARTIFACT_ZIP=${CUSTOM_S3_ARTIFACT_ZIP:-"${SERVICE_NAME}-${TAG}.zip"}
 case "$INSTRUCTION" in
 
   plan)
     terraform init
-    terraform plan "${EXTRA_VARS}"
+    terraform plan -var=s3_artifact_zip="${S3_ARTIFACT_ZIP}"
     ;;
 
   apply)
-    terraform apply -auto-approve "${EXTRA_VARS}"
+    terraform apply -auto-approve -var=s3_artifact_zip="${S3_ARTIFACT_ZIP}"
     ;;
 
   destroy)
-    terraform destroy -auto-approve "${EXTRA_VARS}"
+    terraform destroy -auto-approve -var=s3_artifact_zip="${S3_ARTIFACT_ZIP}"
     ;;
 
   *)

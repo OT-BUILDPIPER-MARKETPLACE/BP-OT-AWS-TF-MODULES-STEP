@@ -1,22 +1,46 @@
 #!/bin/bash
+
 source /opt/buildpiper/shell-functions/functions.sh
 source /opt/buildpiper/shell-functions/log-functions.sh
 
-logInfoMessage "Creating for $MODULE"
-logInfoMessage "I'll create/update [$MODULE] whose properties are available at [$WORKSPACE] and have mounted at [$CODEBASE_DIR]"
-sleep  "$SLEEP_DURATION"
+#logInfoMessage "Creating for $MODULE"
+tfCodeLocation="${WORKSPACE}"/"${CODEBASE_DIR}"/"${TF_CODE_LOCATION}"
+logInfoMessage "I'll create/update terraform code  available at [$tfCodeLocation]"
 
-cd  "$WORKSPACE"/"${CODEBASE_DIR}"
-cp /opt/buildpiper/modules/${MODULE}/*.tf .
+cd  "${tfCodeLocation}"
+
+#cp -r /opt/buildpiper/modules/${MODULE} ${tfCodeLocation}/
+#cp /opt/buildpiper/modules/${MODULE}/*.tf .
 
 logInfoMessage "Running below tf command"
 logInfoMessage "terraform $INSTRUCTION"
+if [ "$ASSUME_OTHER_ROLE" == true ]
+then
+        role_output=$(aws sts assume-role --role-arn arn:aws:iam::$ACCOUNT_ID:role/$ROLE_NAME --role-session-name $ROLE_SESSION_NAME)
+
+        # Check if the assume-role command was successful
+        if [ $? -ne 0 ]; then
+          echo "Failed to assume role."
+          exit 1
+        fi
+
+        # Parse the JSON output and set environment variables
+        AWS_ACCESS_KEY_ID=$(echo $role_output | jq -r '.Credentials.AccessKeyId')
+        AWS_SECRET_ACCESS_KEY=$(echo $role_output | jq -r '.Credentials.SecretAccessKey')
+        AWS_SESSION_TOKEN=$(echo $role_output | jq -r '.Credentials.SessionToken')
+
+        # Export the variables
+        export AWS_ACCESS_KEY_ID
+        export AWS_SECRET_ACCESS_KEY
+        export AWS_SESSION_TOKEN
+fi
+
 
 terraform init
-
 case "$INSTRUCTION" in
 
   plan)
+    terraform init
     terraform plan -var-file="terraform.tfvars"
     ;;
 

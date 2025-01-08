@@ -30,12 +30,31 @@ else
   logInfoMessage "No GIT Credentials Provided. ~/.netrc will not be created."
 fi
 
+if [[ -z "$AUTH_METHOD" ]]; then
+  logErrorMessage "AUTH_METHOD is not set."
+  exit 1
+fi
 
-if [[ -n "$ROLE_ARN" ]]; then
-  # Calling assumeRole with ROLE_ARN and SESSION_NAME
-  assumeRole "$ROLE_ARN" "$SESSION_NAME"
+if [[ "$AUTH_METHOD" == "KEYS" ]]; then
+  # Verify AWS keys
+  if [[ -z "$AWS_ACCESS_KEY_ID" || -z "$AWS_SECRET_ACCESS_KEY" ]]; then
+    logErrorMessage "AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY is not set."
+    exit 1
+  else
+    logInfoMessage "Authentication via AWS Keys"
+    export "${AWS_ACCESS_KEY_ID}"
+    export "${AWS_SECRET_ACCESS_KEY}"
+  fi
+elif [[ "$AUTH_METHOD" == "ROLE" ]]; then
+  if [[ -n "$ROLE_ARN" ]]; then
+    # Calling assumeRole with ROLE_ARN and SESSION_NAME
+    assumeRole "$ROLE_ARN" "$SESSION_NAME"
+  else
+    logInfoMessage "ROLE_ARN is empty or not set. Using BuildPiper Server Credentials"
+  fi
 else
-  logInfoMessage "ROLE_ARN is empty or not set.Using BP Role"
+  logErrorMessage "AUTH_METHOD must be 'KEYS' or 'ROLE'."
+  exit 1
 fi
 
 

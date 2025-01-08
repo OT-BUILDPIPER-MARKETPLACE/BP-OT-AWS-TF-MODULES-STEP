@@ -24,11 +24,11 @@ function assumeRole() {
 
     # Check if session name and role ARN are provided
     if [[ -z "$session_name" || -z "$role_arn" ]]; then
-        echo "[Error] Missing arguments. Usage: assumeRole <session_name> <role_arn>"
+        logErrorMessage "Missing arguments. Usage: assumeRole <session_name> <role_arn>"
         return 1
     fi
 
-    echo "[Info] Assuming role with session name: $session_name and role ARN: $role_arn"
+    logInfoMessage "Assuming role with session name: $session_name and role ARN: $role_arn"
 
     # Attempt to assume the role
     local assume_role_output
@@ -38,8 +38,8 @@ function assumeRole() {
 
     # Check if the command was successful
     if [[ $? -ne 0 ]]; then
-        echo "[Error] Failed to assume role. AWS CLI returned:"
-        echo "$assume_role_output"
+        logErrorMessage "Failed to assume role. AWS CLI returned:"
+        logErrorMessage "$assume_role_output"
         return 1
     fi
 
@@ -52,7 +52,7 @@ function assumeRole() {
     session_token=$(echo "$assume_role_output" | jq -r '.Credentials.SessionToken')
 
     if [[ -z "$access_key" || -z "$secret_key" || -z "$session_token" ]]; then
-        echo "[Error] Unable to parse credentials from assume-role output."
+        logErrorMessage "Unable to parse credentials from assume-role output."
         return 1
     fi
 
@@ -60,6 +60,6 @@ function assumeRole() {
     export AWS_SECRET_ACCESS_KEY="$secret_key"
     export AWS_SESSION_TOKEN="$session_token"
 
-    echo "[Info] Successfully assumed role. Temporary credentials set in environment variables."
+    logInfoMessage "Successfully assumed role. Temporary credentials set in environment variables."
     return 0
 }

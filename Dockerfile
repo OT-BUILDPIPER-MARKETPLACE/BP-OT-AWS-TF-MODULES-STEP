@@ -1,7 +1,7 @@
 FROM hashicorp/terraform
 
 RUN apk add --no-cache --upgrade bash
-RUN apk add jq
+RUN apk add jq && apk add aws-cli
 
 ENV SLEEP_DURATION 5s
 

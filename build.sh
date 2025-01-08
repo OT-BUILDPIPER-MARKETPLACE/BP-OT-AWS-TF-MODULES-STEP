@@ -2,7 +2,7 @@
 
 source /opt/buildpiper/shell-functions/functions.sh
 source /opt/buildpiper/shell-functions/log-functions.sh
-source /opt/buildpiper/shell-funtions/aws-functions.sh
+source /opt/buildpiper/shell-functions/aws-functions.sh
 
 
 tfCodeLocation="${WORKSPACE}"/"${CODEBASE_DIR}"/"${TF_CODE_LOCATION}"
